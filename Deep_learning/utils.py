@@ -25,31 +25,26 @@ def increase_batch(start, bound, rate=1e-4):
         if not tmp>bound:
             next_size*=(1+rate)
         
-def mini_batch(*x, batch_generator, shuffle=True): 
+def mini_batch(x, t, batch_generator, shuffle=True): 
     # get mini-batch
     ptr = 0
-    if isinstance(x, tuple) or isinstance(x, list):
-        data_size = x[0].shape[0]
-        num_var = len(x) # number of variables
-    else:
-        data_size = x.shape[0]
+    data_size = x.shape[0]
     
-    x_list = []
     if shuffle:
         order = np.arange(data_size)
         np.random.shuffle(order)
-        for _x in x:
-            x_list += [_x[order]]
+        x_shuffle = x[order]
+        t_shuffle = t[order]
     
     batch_size = batch_generator.__next__()    
     while True:
         if not ptr+batch_size >= data_size:
-            yield [_x[ptr:ptr+batch_size] for _x in x_list]
+            yield x_shuffle[ptr:ptr+batch_size], t_shuffle[ptr:ptr+batch_size]
             ptr = ptr + batch_size
             batch_size = batch_generator.__next__()
         else:
             break
-    yield [_x[ptr:] for _x in x_list]
+    yield x_shuffle[ptr:], t_shuffle[ptr:]
 
 def decrease_dropout():
     # decrease dropout rate
