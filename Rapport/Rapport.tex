@@ -1,0 +1,76 @@
+\documentclass{report}
+
+\usepackage[latin1]{inputenc} 
+\usepackage[T1]{fontenc}      
+\usepackage[english]{babel}  
+
+\title{Localization and extraction of centroids from composite materials X-ray tomographies BROUILON}
+\author{Mohamed Aymane Benayada \and Thibault Leblanc \and Kai-Wei Tsou \and Julien Zhou}
+\date{March 2019}
+
+\begin{document}
+ 
+\maketitle
+
+\tableofcontents
+
+
+\chapter{Introduction}
+ 
+Increasingly more composite materials are used in aeronautics, especially in engines. These materials are made of 	carbon fibers bundles which are weaved together within a resin matrix. It is essential, especially in ordre to reduce the cost of experimental studies, to determine or even predict the mechanical properties of these new materials thanks to numerical methods. Checking the weaving is necessary in order to discard parts with a defective weaving. Non destructive testing of aeronautic materials uses X-ray tomography to scan the structure of the material.
+
+
+Currently, those volumes are analyzed manually and the centers of the bundles are annotated manually on a few slices. The remaining annotations are obtained through interpolations.This structure extraction step is currently essential for it allows to define the number of bundles to represent and to identify them to obtain their trajectory.
+
+
+Manual annotations and interpolation corrections are time consuming and hard to get. To this day, the automation of centroid detection remains an open subject because of the complexity of image interpretation, especially when the bundles are weaved in a very compact way and that is impossible to distinguish them, without taking into consideration their configuration on neighboring slices.\newline
+
+In this project, our objective has been to try an approach to automatize the detection of bundle of fibers in X-ray tomographies. As getting annotated data is want to avoid, we based our approach on mainly unsupervised methods or methods with the least inputs from an external user possible.
+
+In the following, present the database and the way we preprocessed our images before introducing the methods that we implemented and discussing our results.
+
+\chapter{Context}
+
+In this chapter, we introduce a formalization of the problem, the database that will be used in the following to test the approaches and a scoring methodology.
+
+\section{Problem}
+
+The overall objective of the project is to study approached to automatize the detection and segmentation of different bundles of fibers from X-ray tomographies to retrieve their centroids, the far end obective being implement a non destructive control procedure.  
+
+In fact, if we manage to get the centroids on each slice of the volume, and to link them between the slices, a 3D model of the material could be derived, which would enables to test the mechanical properties on numerical simulations.
+
+Several classic image processing method enables image segmentation, but they usually work with images with good contrasts and clearly defined edges, which is not really the case here as we will see. To account for that, we tried machine learning and deep learning methods.
+
+\section{Database}
+
+We used a volume of slices given by Safran.
+
+Visualisation....
+
+The bundles are not clearly separated and the image is dense....
+
+\section{Scoring: Aggregated Jaccard Index}
+
+PResentation of the index
+
+\chapter{Image preprocessing}
+\section{Pruning}
+\section{Denoising}
+\subsection{etc}
+
+\chapter{Segmentation}
+\section{A few methods}
+\section{Methods tried}
+\subsection{etc}
+
+\chapter{Results and discussion}
+\section{A few methods}
+\section{Methods tried}
+\subsection{etc}
+
+\chapter{Conclusion}
+
+\chapter{Bibliography}
+REMPLIR
+
+\end{document}
