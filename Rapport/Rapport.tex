@@ -3,6 +3,10 @@
 \usepackage[latin1]{inputenc} 
 \usepackage[T1]{fontenc}      
 \usepackage[english]{babel}  
+\usepackage{hyperref}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage[top=2cm, bottom=2cm, left=2cm, right=2cm]{geometry}
 
 \title{Localization and extraction of centroids from composite materials X-ray tomographies BROUILON}
 \author{Mohamed Aymane Benayada \and Thibault Leblanc \and Kai-Wei Tsou \and Julien Zhou}
@@ -35,7 +39,7 @@ In this chapter, we introduce a formalization of the problem, the database that 
 
 \section{Problem}
 
-The overall objective of the project is to study approached to automatize the detection and segmentation of different bundles of fibers from X-ray tomographies to retrieve their centroids, the far end obective being implement a non destructive control procedure.  
+The overall objective of the project is to study approaches to automatize the detection and segmentation of different bundles of fibers from X-ray tomographies to retrieve their centroids, the far end objective being to implement a non destructive control procedure.  
 
 In fact, if we manage to get the centroids on each slice of the volume, and to link them between the slices, a 3D model of the material could be derived, which would enables to test the mechanical properties on numerical simulations.
 
@@ -43,27 +47,226 @@ Several classic image processing method enables image segmentation, but they usu
 
 \section{Database}
 
-We used a volume of slices given by Safran.
+Safran provided us a volume of 1018 slices of 1024x1004 pixels images. \newline
 
-Visualisation....
+Visualisation of a few images....
 
-The bundles are not clearly separated and the image is dense....
+In the few firsts and last images, we observed distorsions in the images, so we decided to discard them (at least in the beginning). We kept the images from 150 to 850 (included), totalling 650 images.  
+
+At first view, it seems that the bundles of fibres often not clearly separated of clumped together in the images, we can assume that the main hindrance would be to find a way to separate those clumps.
 
 \section{Scoring: Aggregated Jaccard Index}
 
-PResentation of the index
+We define here a scoring methodology that we will use in the following to evaluate the methods: the Aggregated Jaccard Index. \newline
+
+
+\href{https://www.researchgate.net/publication/314271512_A_Dataset_and_a_Technique_for_Generalized_Nuclear_Segmentation_for_Computational_Pathology}{source}
+
+The Jaccard index, or Jaccard similarity coefficient, or Intersection over union is a metric used in statistics to compare the similarity between sets.  
+For two sets of elements (in our case, it would be pixels), $A$ and $B$, the Jaccard index $J(A,B)$ is defined as:
+\[J(A,B)=\frac{|A\bigcap B|}{|A\bigcup B|}\]
+This function returns 0 if the two sets have no element in common and 1 if they are identical. \newline
+
+We use a metric inspired from this index, an Aggregated Jaccard Index (AJI), enabling the comparison of different segmentations for unlabeled elements.  
+Let's call $G_i$ the ground truth sets and $D_j$ the detected ones. The metric is computed as follows:
+\begin{algorithm}
+\caption{Computing the Aggregatd Jaccard Index}
+\begin{algorithmic} 
+\STATE Numerator $N \leftarrow 0$
+\STATE Denominator $D \leftarrow 0$
+\FOR{Each ground truth bundle $G_i$}
+\STATE $j \leftarrow argmax_k J(G_i, S_k)$
+\STATE $N \leftarrow N+|G_i\bigcap S_j|$
+\STATE $D \leftarrow D+|G_i\bigcup S_j|$
+\STATE Mark $S_j$ as used
+\ENDFOR
+\FOR{Each segmented bundle $S_k$}
+\IF{$S_k$ has not been used}
+\STATE $D \leftarrow D + |S_k|$
+\ENDIF
+\ENDFOR
+\STATE $AJI \leftarrow N/D$
+\end{algorithmic}
+\end{algorithm}
+
+For each ground truth object $G_i$, we associate the segmented object $S_j$ and add the pixel count $|G_i\bigcap S_j|$ to AJI numerator and $|G_i\bigcup S_j|$ to the denominator.    
+Therefore, for ground truth fibers not detected, it only adds its pixel count to the denominator.   
+And besides, the pixel count of all the unused detected element is added to the denominator count. \newline
+
+This index tackle the following errors:
+- Missed detection of ground truth annotated objects (pixel count in denominator increased)
+- False detection (unused $S_k$, pixel count in denominator)
+- Under-segmentation (the pixels are added several times in the denominator)
+- Over segmentation (several unused detections and small numerator VS big denominator)
+
+Like before, the score is 1 if the segmentations are identical, and decreases if we are "`far"' from it.
 
 \chapter{Image preprocessing}
-\section{Pruning}
+
+In this chapter, we present the methodology used to preprocess the images before the segmentation step.
+As written before, the firsts and last images of the volume show some distorsions, therefore, we only took the images from 150 to 850 from the 1018 images provided. \newline
+
+We used the following process:  
+- Trimming: in order to only keep the relevant part,  
+- Denoising: we applied a first median filter to attenuate the noise,  
+- Histogram Manipulation: to enhance the contrast of the image,  
+- Denoising: to attenuate the potential noise from the last step.
+
+\section{Trimming}
+
+ The part that interest us in the images is the center.   
+Visu
+
+The first step is therefore to separate it from the rest. We roughly extracted a rectangle in the middle of the image, containing the interesting part.
+Visu
+
 \section{Denoising}
-\subsection{etc}
+Blablabla
+
+\section{Histogram Manipulation}
+
+It is possible to increase the contrast of an image by adjusting its histogram.   
+We explored 3 histogram manipulation methods:  
+- histogram stretching  
+- histogram equalization  
+- adaptative equalization.  \newline
+
+At the end, the method that we kept is the adaptative equalization.
+
+\subsection{Histogram Stretching}
+
+This technique improves the constrast by stretching the range of intensity to span the whole range of values. It applies a linear scaling to the image pixel values, and preserve the overall "shape" of the histogram.
+
+To manage the outlier values in the histogram, we use the first and last percentiles instead of min and max values.
+
+If c and d are the current values of the pecentile (let's say 2 and 98) of the histogram, and a and b are the desired min and max values (0 and 255), we have:
+$$ P_{out} = (P_{in}-c)(\frac{b-a}{d-c})+a $$
+
+
+Visu...
+
+This operation improved the overall contrast in the image between dark parts (edges) and light parts (inner part of the fibers).  
+However, the gap between the 2 intensity maxima is rather wide and it may be difficult to find an appropriate treshold for a global tresholding method for example.
+
+\subsection{Histogram Equalization}
+
+This method is used to increase the global contrast of images. It distributes the intensities by spreading out the most frequent values.
+
+The method is a simple one and pretty straightforward, but a disadvantage is that it may also increase the contrast of the noise.
+
+This method try to flatten the histogram of the image, and to change the cdf into a straight line.
+
+Visu...
+
+Ths method flattened the histogram.  
+In our case, we can see that it has increased the noise a lot.
+
+\subsection{Adaptative Histogram Equalization}
+This is the method that we kept.
+This method differs from ordinary histogram equalization in the fact that it computes several histograms, each corresponding to a distinct section of the image.  
+This method improves the local contrast and the definition of the edges in each region.
+
+Visu...
+
+The result show an enhanced contrast, with less noise amplification than with the global equalization.  
+Besides, we kept the histogram structure with the two maxima corresponding to the inner and the edges of the fibers.
+
+
+\section{Annotations}
+
+In order to have a few ground truth segmentations, we manually annotated a few, using this soft found on github\href{https://github.com/wkentaro/labelme}{here}.
+
+VISU
+
+We labeled 15 images equally distanced in the volume of 700 images.
 
 \chapter{Segmentation}
-\section{A few methods}
-\section{Methods tried}
-\subsection{etc}
+
+\section{"`Classic"' image processing methods}
+
+There already exist several methods in image processing to segment images, mainly using the difference between different part of it to separate them.   
+However, as we will see, they do not work very well on their own, mainly because of the fact that the edges are not clearly delimited.
+
+\subsection{Filters}
+\subsection{Morphology}
+\subsection{Watershed}
+\subsection{Maximally Stable Extremal Regions}
+
+The idea is to exploit the evolution of regions using different tresholds on an image. \newline
+
+In fact, an increasing (or decreasing) tresholds on an image reveals growing areas of pixels that are below (or above) this treshold. The method consist in computing the area evolution rate of these regions and to consider that they are stable if this rate decreases. Therefore, this methods gives several "`stable"' regions on an image, and we can hope that they correspond to our bundles.  
+However, this method need some tuning, notably the treshold changing rate, and we can use more informations like a bias on the area of the stable regions and their number.
+
+Visu  
+Equations
+
+\chapter{"`Advanced"' methods}
+
+Our particular subject does not possess extensive litterature, but it has similarities with another one, the automatic cell detection on microscope images, which is more treated, and on which we concentrated our research.
+
+The two mains categories of methods used in the litterature are roughly supervised and unsupervised methods.  \newline
+
+In our case, supervised methods (dire les ref) has a huge drawback. They need a lot of already annotated data to train them, which is not really doable here.  \newline
+
+For unsupervised methods, we are trying to get informations from the data without any training set, which is our case.
+In the case of deep learning an architecture enabling unsupervised training is an autoencoder (develop). We mainly looked at 2 autoencoders and implemented one for our tests.
+Another approach which could be promising would be to try to find a way to retrieve the missing edges, using for example the concavity of some curves in the image (cf...).
+
+\section{W-net}
+
+\section{Sparse autoencoder}
+
+
+
+\chapter{Methods tried}
+We present here the methods that we actually implemented.
+
+\section{Maximally stable Extremal Region}
+
+We implemented the MSER algorithm as follows, adding a criteria on the minimal area of a component:
+\begin{algorithm}
+\caption{MSER implementation}
+\begin{algorithmic} 
+\STATE Starting treshold $tresh_{min}$
+\STATE Maximum treshold $tresh_{max}$
+\STATE Treshold step $tresh_{step}$
+\STATE Minimal area $area_{min}$ 
+\STATE Set of stopped components $Stopped_{Set}$ \newline
+
+\STATE Current treshold $tresh_{current} = tresh_{min}$
+\STATE We treshold the image and recover the connected components in $label_{current}$
+\WHILE{$tresh_{current} \leq tresh_{max}$}
+	\STATE $tresh_{current} \leftarrow tresh_{current} + tresh_{step}$
+	\STATE We treshold the image and recover the new components in $label_{new}$
+	\STATE We link the new labels with the old ones
+	\STATE We compute the new growing rate
+	\STATE Forall the new compoenntns, if the rate has decreased, we add them to stopped if the min area is reached otherwise we delete it
+\ENDWHILE
+
+\STATE Denominator $D \leftarrow 0$
+\FOR{Each ground truth bundle $G_i$}
+\STATE $j \leftarrow argmax_k J(G_i, S_k)$
+\STATE $N \leftarrow N+|G_i\bigcap S_j|$
+\STATE $D \leftarrow D+|G_i\bigcup S_j|$
+\STATE Mark $S_j$ as used
+\ENDFOR
+\FOR{Each segmented bundle $S_k$}
+\IF{$S_k$ has not been used}
+\STATE $D \leftarrow D + |S_k|$
+\ENDIF
+\ENDFOR
+\STATE $AJI \leftarrow N/D$
+\end{algorithmic}
+\end{algorithm}
+  
+
+
+
+\section{Sparse autoencoder}
 
 \chapter{Results and discussion}
+We present here our results.
+
 \section{A few methods}
 \section{Methods tried}
 \subsection{etc}
