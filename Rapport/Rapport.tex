@@ -7,6 +7,10 @@
 \usepackage{algorithm}
 \usepackage{algorithmic}
 \usepackage[top=2cm, bottom=2cm, left=2cm, right=2cm]{geometry}
+\usepackage{wrapfig}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
 
 \title{Localization and extraction of centroids from composite materials X-ray tomographies BROUILON}
 \author{Mohamed Aymane Benayada \and Thibault Leblanc \and Kai-Wei Tsou \and Julien Zhou}
@@ -171,6 +175,76 @@ Visu...
 The result show an enhanced contrast, with less noise amplification than with the global equalization.  
 Besides, we kept the histogram structure with the two maxima corresponding to the inner and the edges of the fibers.
 
+\section{Binarization}
+
+As many algorithm are simpler to use with binary images, we thresholded the images in order to have the background in black and the foreground in white.\newline
+To this end, a right approach in histogram manipulation is helpfull in getting a consistent binarized image (that an image for which the grayscale values are as polarized as possible).\newline
+After trial, we maid the choice of computing a threshold based on the yen approach.
+We adapted this treshold by a multplicative factor determined by hand.
+
+\begin{figure}[!h]
+\centering
+	\begin{subfigure}[b]{0.4\linewidth}
+		\centering
+		\includegraphics[width=\linewidth]{figures/Thibault/fibres_original.png}
+		\caption{Original image.}
+	\end{subfigure}
+~
+	\begin{subfigure}[b]{0.4\linewidth}
+		\centering
+		\includegraphics[width=\linewidth]{figures/Thibault/fibres_binar.png}
+	\caption{Binarized image.}
+\end{subfigure}
+\label{fig:binar}
+\end{figure}
+
+\section{Morphological closing}
+
+In order to have a clean image as much as possible, we tried to suppress the white dots the we can see in the binarized image.
+Morphological operations can help to achieve this. They are based in using the context an image's pixel to change its value and perform some smoothing in the image.
+Two operations are at the bases of morphological operations:
+\begin{itemize}
+
+\item{Dilation}\\\\
+In dilation, a kernel of a specified size will slide on an image an put to 0 all pixels that have a 0 pixel under the kernel when the kernel is centered on it. Dilation operation correspond to dilating the white parts of an image like so:
+
+\begin{minipage}{\linewidth}
+	\centering
+	\includegraphics[width=5cm]{figures/Thibault/Morphology_1_Tutorial_Theory_Dilatation_2.png}
+	\captionof{figure}{Exemple of dilation by a 3x3 kernel}
+\end{minipage}
+
+\item{Erosion}\\\\
+Erosion would be the reverse operation where all pixels for which the kernel sees a black pixel when it is centerd on it is put to black:
+
+\begin{minipage}{\linewidth}
+	\centering
+	\includegraphics[width=5cm]{figures/Thibault/Morphology_1_Tutorial_Theory_Erosion_2.png}
+	\captionof{figure}{Exemple of erosion by a 3x3 kernel}
+\end{minipage}
+
+\end{itemize}
+
+
+We used a combination of dilation and erosion, known as morphological opening. The interest of this operation is that white dots
+contained in the fibers will be merged to the fiber during the dilation and won't be changes back to white during erosion because
+their context pixels will be black.
+
+\begin{figure}[!h]
+\centering
+	\begin{subfigure}[b]{0.4\linewidth}
+		\centering
+		\includegraphics[width=\linewidth]{figures/Thibault/fibres_binar.png}
+		\caption{Binarized image.}
+	\end{subfigure}
+~
+	\begin{subfigure}[b]{0.4\linewidth}
+		\centering
+		\includegraphics[width=\linewidth]{figures/Thibault/fibres_closed.png}
+	\caption{Closed binarized image.}
+\end{subfigure}
+\label{fig:binar}
+\end{figure}
 
 \section{Annotations}
 
@@ -180,17 +254,55 @@ VISU
 
 We labeled 15 images equally distanced in the volume of 700 images.
 
-\chapter{Segmentation}
-
-\section{"`Classic"' image processing methods}
+\chapter{Classical segmentation methods}
 
 There already exist several methods in image processing to segment images, mainly using the difference between different part of it to separate them.   
 However, as we will see, they do not work very well on their own, mainly because of the fact that the edges are not clearly delimited.
 
-\subsection{Filters}
-\subsection{Morphology}
-\subsection{Watershed}
-\subsection{Maximally Stable Extremal Regions}
+\section{Filters}
+\section{Watershed}
+The watershed transformation treats the image it operates upon like a topographic map, with the brightness of each point representing its height, and finds the lines that run along the tops of ridges. The basins delimited by these ridges will then be considered as
+seperate entities.\newline
+To apply this method, it is required to have regions that will be the starting points of the basins.
+\medskip
+Classicaly, this is done by using the distance transformed map of the input image, which is defined as the 2d array
+of the same size as the input image containing the distances of each pixel to its nearest white pixel.
+\medskip\newline
+Because of the rectangular shape of the fibers, we used the following distance on during this transformation:
+$d((x_1,y_1),(x_2,y_2))=|x_1-x_2|+\alpha{|y_1-y_2|}$ where $\alpha$ is a parameter of the model.\newline
+This makes the pixel where two fibers are horizontally overlapping have lower value than they would have had with an euclidian distance.
+
+We then used the yen threshold to select the values that are high enough and indicate a potential basin of attraction for the watershed algorithm.
+\begin{figure}[!h]
+\centering
+	\begin{subfigure}[b]{0.4\linewidth}
+		\centering
+		\includegraphics[width=\linewidth]{figures/Thibault/fibres_binar.png}
+		\caption{Binarized image.}
+	\end{subfigure}
+~
+	\begin{subfigure}[b]{0.4\linewidth}
+		\centering
+		\includegraphics[width=\linewidth]{figures/Thibault/fibres_distance.png}
+	\caption{Thresholded distance transformed image.}
+\end{subfigure}
+\label{fig:binar}
+\end{figure}
+
+
+We then used an implementation of the watershed algorithm to obtain the segmentation from \ref{fig:seg}
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=9cm]{figures/Thibault/fibres_water.png}
+	\caption{Watershed segmentation}
+	\label{fig:seg}
+\end{figure}
+
+The algorithm shows good results. However it is still unable to separate fibers that overlap too much.\newline
+We found a great sensitivity of the algorithm to the different threshold used.\newline
+The threshold used to binarize the input image makes the algorithm detect lots of small portions if it is too high (because the fibers in the binarized image were burst in pieces), and large connected components if it is too low. On the other hand, the threshold on the distance transformed image acts in the opposite direction with high values causing few attraction basins detected by the algorithm and high values rendering lots of small pieces.
+\section{Maximally Stable Extremal Regions}
 
 The idea is to exploit the evolution of regions using different tresholds on an image. \newline
 

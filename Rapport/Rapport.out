@@ -10,13 +10,13 @@
 \BOOKMARK [2][-]{subsection.3.3.1}{Histogram Stretching}{section.3.3}% 10
 \BOOKMARK [2][-]{subsection.3.3.2}{Histogram Equalization}{section.3.3}% 11
 \BOOKMARK [2][-]{subsection.3.3.3}{Adaptative Histogram Equalization}{section.3.3}% 12
-\BOOKMARK [1][-]{section.3.4}{Annotations}{chapter.3}% 13
-\BOOKMARK [0][-]{chapter.4}{Segmentation}{}% 14
-\BOOKMARK [1][-]{section.4.1}{"`Classic"' image processing methods}{chapter.4}% 15
-\BOOKMARK [2][-]{subsection.4.1.1}{Filters}{section.4.1}% 16
-\BOOKMARK [2][-]{subsection.4.1.2}{Morphology}{section.4.1}% 17
-\BOOKMARK [2][-]{subsection.4.1.3}{Watershed}{section.4.1}% 18
-\BOOKMARK [2][-]{subsection.4.1.4}{Maximally Stable Extremal Regions}{section.4.1}% 19
+\BOOKMARK [1][-]{section.3.4}{Binarization}{chapter.3}% 13
+\BOOKMARK [1][-]{section.3.5}{Morphological closing}{chapter.3}% 14
+\BOOKMARK [1][-]{section.3.6}{Annotations}{chapter.3}% 15
+\BOOKMARK [0][-]{chapter.4}{Classical segmentation methods}{}% 16
+\BOOKMARK [1][-]{section.4.1}{Filters}{chapter.4}% 17
+\BOOKMARK [1][-]{section.4.2}{Watershed}{chapter.4}% 18
+\BOOKMARK [1][-]{section.4.3}{Maximally Stable Extremal Regions}{chapter.4}% 19
 \BOOKMARK [0][-]{chapter.5}{"`Advanced"' methods}{}% 20
 \BOOKMARK [1][-]{section.5.1}{W-net}{chapter.5}% 21
 \BOOKMARK [1][-]{section.5.2}{Sparse autoencoder}{chapter.5}% 22
