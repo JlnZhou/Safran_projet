@@ -327,12 +327,69 @@ Another approach which could be promising would be to try to find a way to retri
 \section{W-net}
 
 \section{Sparse autoencoder}
-
+\subsection{architecture}
 The authors of \cite{ref} used an encoder architecture to perform several tasks on cytoplasm images which contained several nuclei.
 The different tasks they wanted to perform on these images were nuclei detection, nucei classification by cell type and nuclei segmentation.\newline
 
 Their idea was to train a sparse autoencoder with a hidden layer that would contain the position of each nuclei as well a feature vector for each of them.
-Therefore, the goal of the architecture is to have a 3-dimensional middle layer with most of its depthwise vectors being zeros.
+Therefore, the goal of the architecture is to have a 3-dimensional middle layer with most of its depthwise vectors being zeros as an encoding from which to reconstruct the image.
+\begin{figure}[!h]
+\centering
+\includegraphics[width=7cm]{figures/Thibault/senc_hidden.png}
+\caption{Encoder's hidden layer}
+\end{figure}
+\newline
+The original architecture consists of a background encoding branch (lower branch of \ref{fig:arc}), a nuclei detection branch (middle branch of \ref{fig:arc}) and a local embedding branch that are convolutions that are point-wise multiplied with the detection map (upper branch of \ref{fig:arc})
+\begin{figure}[!h]
+\centering
+\includegraphics[width=17cm]{figures/Thibault/arc.png}
+\caption{Encoder's architecture}
+\label{fig:arc}
+\end{figure}
+
+\medskip
+We tried to adapt this architecture to our problem.
+Since the background of the images is almost constant in color, we got rid of the background encoding branch.
+We also used less feature maps in the convolutions because the bricks we were trying to encode had less complexity than the original images.
+In the section below, we detail a few implementation choices that we have made with this architecture.
+
+\subsection{Implementation choices}
+\begin{itemize}
+\item{sparsity enforcement}
+\medskip
+\newline
+The middle detection map is a 2D image that we want to be sparse with a predefined sparsity rate $\rho$\quad(we calculated the average density of
+the fibers and derived the sparsity rate from it).\newline
+To obtain this sparsity rate, we thresholded the detection map $D$ in a differentiable manner: $D'=\sigma(r(D-t_{\rho}))$
+
+The way we found to calculate an appropriate threshold at batch level was to use a stochastic approximation.\newline
+For a given 2D image from one sample, let $(X_n)$ be a flatten vector containg the values of its pixels, we take the last value of $\theta_n$ defined by $\theta_{n+1}=\theta_n-\frac{2}{n+1}*(1_{(X_{n+1}\le\theta_n)}-\rho)$\newline
+We then average the values obtain on each sample of the batch.\newline
+We also keep a running average of the thresholding value in memory for test time.
+Thresholding with this value gave consistent sparsity rates when testing on random tensors.
+\medskip
+\item{Normalization}
+\medskip
+\newline
+We found that keeping the values flowing in the network within a certain range was crucial.
+To this end, we normalized the input tensor. We also used batch normalization between every layer which we found to be very usefull.
+before the thresholding of the middle layer, we used batch normalization without mean and scale learnable parameters.
+Indeed, we wanted the middle layer to have zero mean and unit variance to avoid it from lowering its variance via learnable scale parameter to have values within an ambiguous range of value of the sigmoid function (which we want to use as a thresholding function).
+\end{itemize}
+\subsection{Hyperparameters'influence}
+We will detail some observation we made hyperparameters.
+\newline
+\bigskip
+\begin{itemize}
+\item{r (intensity of thresholding $D'=\sigma(r(D-t_{\rho}))$)}
+\medskip
+\newline
+For the result we seek, we would think want this value to be as large as possible while avoiding exploding values during training.
+However, we observed that the network was very keen on detecting some spots between the fibers and reconstruct the image from these.
+This is what quickly happens when the thresholding was too hard.\newline
+This may be due to a too powerfull architecture that allows the network to have the necessary informations to reconstruct the image from some points in between the cells, while the goal is to force it to use the informations about the simplest objects in the image
+which are the brick shaped fibers.
+\
 
 
 \chapter{Methods tried}
