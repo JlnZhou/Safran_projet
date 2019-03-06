@@ -21,12 +21,15 @@
 \contentsline {chapter}{\numberline {5}Deep learning methods}{10}{chapter.5}% 
 \contentsline {section}{\numberline {5.1}W-net}{10}{section.5.1}% 
 \contentsline {section}{\numberline {5.2}Sparse autoencoder}{10}{section.5.2}% 
-\contentsline {chapter}{\numberline {6}Methods tried}{11}{chapter.6}% 
-\contentsline {section}{\numberline {6.1}Maximally stable Extremal Region}{11}{section.6.1}% 
-\contentsline {section}{\numberline {6.2}Sparse autoencoder}{11}{section.6.2}% 
-\contentsline {chapter}{\numberline {7}Results and discussion}{12}{chapter.7}% 
-\contentsline {section}{\numberline {7.1}A few methods}{12}{section.7.1}% 
-\contentsline {section}{\numberline {7.2}Methods tried}{12}{section.7.2}% 
-\contentsline {subsection}{\numberline {7.2.1}etc}{12}{subsection.7.2.1}% 
-\contentsline {chapter}{\numberline {8}Conclusion}{13}{chapter.8}% 
-\contentsline {chapter}{\numberline {9}Bibliography}{14}{chapter.9}% 
+\contentsline {subsection}{\numberline {5.2.1}architecture}{10}{subsection.5.2.1}% 
+\contentsline {subsection}{\numberline {5.2.2}Implementation choices}{11}{subsection.5.2.2}% 
+\contentsline {subsection}{\numberline {5.2.3}Hyperparameters'influence}{11}{subsection.5.2.3}% 
+\contentsline {chapter}{\numberline {6}Methods tried}{12}{chapter.6}% 
+\contentsline {section}{\numberline {6.1}Maximally stable Extremal Region}{12}{section.6.1}% 
+\contentsline {section}{\numberline {6.2}Sparse autoencoder}{13}{section.6.2}% 
+\contentsline {chapter}{\numberline {7}Results and discussion}{14}{chapter.7}% 
+\contentsline {section}{\numberline {7.1}A few methods}{14}{section.7.1}% 
+\contentsline {section}{\numberline {7.2}Methods tried}{14}{section.7.2}% 
+\contentsline {subsection}{\numberline {7.2.1}etc}{14}{subsection.7.2.1}% 
+\contentsline {chapter}{\numberline {8}Conclusion}{15}{chapter.8}% 
+\contentsline {chapter}{\numberline {9}Bibliography}{16}{chapter.9}% 

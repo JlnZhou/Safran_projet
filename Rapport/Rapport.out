@@ -20,12 +20,15 @@
 \BOOKMARK [0][-]{chapter.5}{Deep learning methods}{}% 20
 \BOOKMARK [1][-]{section.5.1}{W-net}{chapter.5}% 21
 \BOOKMARK [1][-]{section.5.2}{Sparse autoencoder}{chapter.5}% 22
-\BOOKMARK [0][-]{chapter.6}{Methods tried}{}% 23
-\BOOKMARK [1][-]{section.6.1}{Maximally stable Extremal Region}{chapter.6}% 24
-\BOOKMARK [1][-]{section.6.2}{Sparse autoencoder}{chapter.6}% 25
-\BOOKMARK [0][-]{chapter.7}{Results and discussion}{}% 26
-\BOOKMARK [1][-]{section.7.1}{A few methods}{chapter.7}% 27
-\BOOKMARK [1][-]{section.7.2}{Methods tried}{chapter.7}% 28
-\BOOKMARK [2][-]{subsection.7.2.1}{etc}{section.7.2}% 29
-\BOOKMARK [0][-]{chapter.8}{Conclusion}{}% 30
-\BOOKMARK [0][-]{chapter.9}{Bibliography}{}% 31
+\BOOKMARK [2][-]{subsection.5.2.1}{architecture}{section.5.2}% 23
+\BOOKMARK [2][-]{subsection.5.2.2}{Implementation choices}{section.5.2}% 24
+\BOOKMARK [2][-]{subsection.5.2.3}{Hyperparameters'influence}{section.5.2}% 25
+\BOOKMARK [0][-]{chapter.6}{Methods tried}{}% 26
+\BOOKMARK [1][-]{section.6.1}{Maximally stable Extremal Region}{chapter.6}% 27
+\BOOKMARK [1][-]{section.6.2}{Sparse autoencoder}{chapter.6}% 28
+\BOOKMARK [0][-]{chapter.7}{Results and discussion}{}% 29
+\BOOKMARK [1][-]{section.7.1}{A few methods}{chapter.7}% 30
+\BOOKMARK [1][-]{section.7.2}{Methods tried}{chapter.7}% 31
+\BOOKMARK [2][-]{subsection.7.2.1}{etc}{section.7.2}% 32
+\BOOKMARK [0][-]{chapter.8}{Conclusion}{}% 33
+\BOOKMARK [0][-]{chapter.9}{Bibliography}{}% 34
