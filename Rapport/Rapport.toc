@@ -18,7 +18,7 @@
 \contentsline {section}{\numberline {4.1}Filters}{8}{section.4.1}% 
 \contentsline {section}{\numberline {4.2}Watershed}{8}{section.4.2}% 
 \contentsline {section}{\numberline {4.3}Maximally Stable Extremal Regions}{9}{section.4.3}% 
-\contentsline {chapter}{\numberline {5}"`Advanced"' methods}{10}{chapter.5}% 
+\contentsline {chapter}{\numberline {5}Deep learning methods}{10}{chapter.5}% 
 \contentsline {section}{\numberline {5.1}W-net}{10}{section.5.1}% 
 \contentsline {section}{\numberline {5.2}Sparse autoencoder}{10}{section.5.2}% 
 \contentsline {chapter}{\numberline {6}Methods tried}{11}{chapter.6}% 

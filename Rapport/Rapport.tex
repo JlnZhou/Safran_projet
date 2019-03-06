@@ -312,22 +312,27 @@ However, this method need some tuning, notably the treshold changing rate, and w
 Visu  
 Equations
 
-\chapter{"`Advanced"' methods}
+\chapter{Deep learning methods}
 
 Our particular subject does not possess extensive litterature, but it has similarities with another one, the automatic cell detection on microscope images, which is more treated, and on which we concentrated our research.
 
 The two mains categories of methods used in the litterature are roughly supervised and unsupervised methods.  \newline
 
-In our case, supervised methods (dire les ref) has a huge drawback. They need a lot of already annotated data to train them, which is not really doable here.  \newline
+In our case, supervised methods has a huge drawback. They need a lot of already annotated data to train them, which is not really doable here.  \newline
 
 For unsupervised methods, we are trying to get informations from the data without any training set, which is our case.
-In the case of deep learning an architecture enabling unsupervised training is an autoencoder (develop). We mainly looked at 2 autoencoders and implemented one for our tests.
-Another approach which could be promising would be to try to find a way to retrieve the missing edges, using for example the concavity of some curves in the image (cf...).
+In the case of deep learning an architecture enabling unsupervised training is an autoencoder. We mainly looked at 2 autoencoders and implemented them for our tests.\newline\newline
+Another approach which could be promising would be to try to find a way to retrieve the missing edges, using for example the concavity of some curves in the image (cf...).\quadà mettre dans la partie d'au dessus ?
 
 \section{W-net}
 
 \section{Sparse autoencoder}
 
+The authors of \cite{ref} used an encoder architecture to perform several tasks on cytoplasm images which contained several nuclei.
+The different tasks they wanted to perform on these images were nuclei detection, nucei classification by cell type and nuclei segmentation.\newline
+
+Their idea was to train a sparse autoencoder with a hidden layer that would contain the position of each nuclei as well a feature vector for each of them.
+Therefore, the goal of the architecture is to have a 3-dimensional middle layer with most of its depthwise vectors being zeros.
 
 
 \chapter{Methods tried}
@@ -388,4 +393,6 @@ We present here our results.
 \chapter{Bibliography}
 REMPLIR
 
+\bibliographystyle{plain}
+\bibliography{biblio}
 \end{document}
