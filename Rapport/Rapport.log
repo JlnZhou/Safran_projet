@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6930 64-bit) (preloaded format=pdflatex 2019.3.4)  6 MAR 2019 13:21
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6930 64-bit) (preloaded format=pdflatex 2019.3.4)  13 MAR 2019 09:35
 entering extended mode
 **./Rapport.tex
 (Rapport.tex
@@ -499,13 +499,13 @@ Underfull \hbox (badness 10000) in paragraph at lines 132--137
 [5
 
 ]
-<figures/Thibault/fibres_original.png, id=212, 322.806pt x 105.39375pt>
+<figures/Thibault/fibres_original.png, id=227, 322.806pt x 105.39375pt>
 File: figures/Thibault/fibres_original.png Graphic file (type png)
 <use figures/Thibault/fibres_original.png>
 Package pdftex.def Info: figures/Thibault/fibres_original.png  used on input li
 ne 189.
 (pdftex.def)             Requested size: 200.19054pt x 65.36113pt.
-<figures/Thibault/fibres_binar.png, id=214, 319.79475pt x 100.57574pt>
+<figures/Thibault/fibres_binar.png, id=229, 319.79475pt x 100.57574pt>
 File: figures/Thibault/fibres_binar.png Graphic file (type png)
 <use figures/Thibault/fibres_binar.png>
 Package pdftex.def Info: figures/Thibault/fibres_binar.png  used on input line 
@@ -524,7 +524,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 208--210
 
  []
 
-<figures/Thibault/Morphology_1_Tutorial_Theory_Dilatation_2.png, id=215, 281.05
+<figures/Thibault/Morphology_1_Tutorial_Theory_Dilatation_2.png, id=230, 281.05
 pt x 150.5625pt>
 File: figures/Thibault/Morphology_1_Tutorial_Theory_Dilatation_2.png Graphic fi
 le (type png)
@@ -544,7 +544,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 217--219
 
 [6 <./figures/Thibault/fibres_original.png> <./figures/Thibault/fibres_binar.pn
 g> <./figures/Thibault/Morphology_1_Tutorial_Theory_Dilatation_2.png>]
-<figures/Thibault/Morphology_1_Tutorial_Theory_Erosion_2.png, id=227, 281.05pt 
+<figures/Thibault/Morphology_1_Tutorial_Theory_Erosion_2.png, id=242, 281.05pt 
 x 150.5625pt>
 File: figures/Thibault/Morphology_1_Tutorial_Theory_Erosion_2.png Graphic file 
 (type png)
@@ -563,7 +563,7 @@ File: figures/Thibault/fibres_binar.png Graphic file (type png)
 Package pdftex.def Info: figures/Thibault/fibres_binar.png  used on input line 
 237.
 (pdftex.def)             Requested size: 200.19054pt x 62.9625pt.
-<figures/Thibault/fibres_closed.png, id=228, 319.1925pt x 98.769pt>
+<figures/Thibault/fibres_closed.png, id=243, 319.1925pt x 98.769pt>
 File: figures/Thibault/fibres_closed.png Graphic file (type png)
 <use figures/Thibault/fibres_closed.png>
 Package pdftex.def Info: figures/Thibault/fibres_closed.png  used on input line
@@ -577,13 +577,13 @@ File: figures/Thibault/fibres_binar.png Graphic file (type png)
 Package pdftex.def Info: figures/Thibault/fibres_binar.png  used on input line 
 280.
 (pdftex.def)             Requested size: 200.19054pt x 62.9625pt.
-<figures/Thibault/fibres_distance.png, id=238, 537.207pt x 168.02776pt>
+<figures/Thibault/fibres_distance.png, id=253, 537.207pt x 168.02776pt>
 File: figures/Thibault/fibres_distance.png Graphic file (type png)
 <use figures/Thibault/fibres_distance.png>
 Package pdftex.def Info: figures/Thibault/fibres_distance.png  used on input li
 ne 286.
 (pdftex.def)             Requested size: 200.19054pt x 62.6154pt.
-<figures/Thibault/fibres_water.png, id=240, 539.616pt x 177.0615pt>
+<figures/Thibault/fibres_water.png, id=255, 539.616pt x 177.0615pt>
 File: figures/Thibault/fibres_water.png Graphic file (type png)
 <use figures/Thibault/fibres_water.png>
 Package pdftex.def Info: figures/Thibault/fibres_water.png  used on input line 
@@ -622,22 +622,13 @@ Underfull \hbox (badness 10000) in paragraph at lines 331--333
 
  []
 
-<figures/Thibault/senc_hidden.png, id=254, 239.09325pt x 96.96225pt>
+<figures/Thibault/senc_hidden.png, id=269, 239.09325pt x 96.96225pt>
 File: figures/Thibault/senc_hidden.png Graphic file (type png)
 <use figures/Thibault/senc_hidden.png>
 Package pdftex.def Info: figures/Thibault/senc_hidden.png  used on input line 3
 38.
 (pdftex.def)             Requested size: 199.16928pt x 80.77602pt.
-
-LaTeX Warning: Reference `fig:arc' on page 10 undefined on input line 342.
-
-
-LaTeX Warning: Reference `fig:arc' on page 10 undefined on input line 342.
-
-
-LaTeX Warning: Reference `fig:arc' on page 10 undefined on input line 342.
-
-<figures/Thibault/arc.png, id=255, 806.41275pt x 254.75175pt>
+<figures/Thibault/arc.png, id=273, 806.41275pt x 254.75175pt>
 File: figures/Thibault/arc.png Graphic file (type png)
 <use figures/Thibault/arc.png>
 Package pdftex.def Info: figures/Thibault/arc.png  used on input line 345.
@@ -694,15 +685,9 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 455.
  (Rapport.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 455.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 455.
+Package rerunfilecheck Info: File `Rapport.out' has not changed.
+(rerunfilecheck)             Checksum: 073CDBB7215E3200373B8F03DB466993;2135.
 
-
-Package rerunfilecheck Warning: File `Rapport.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `Rapport.out':
-(rerunfilecheck)             Before: 5B7CDF7525B16090FD80E185A0AF9EB2;1911
-(rerunfilecheck)             After:  073CDBB7215E3200373B8F03DB466993;2135.
 
 LaTeX Warning: There were undefined references.
 
@@ -716,10 +701,10 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 455.
 ### semi simple group (level 1) entered at line 383 (\begingroup)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 7865 strings out of 492946
- 121216 string characters out of 3124935
- 223983 words of memory out of 3000000
- 11559 multiletter control sequences out of 15000+200000
+ 7868 strings out of 492946
+ 121270 string characters out of 3124935
+ 224042 words of memory out of 3000000
+ 11562 multiletter control sequences out of 15000+200000
  15627 words of font info for 35 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  36i,8n,39p,585b,763s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -745,9 +730,9 @@ bault/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr7.pfb
 ><C:/Users/Thibault/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfon
 ts/cm/cmsy10.pfb><C:/Users/Thibault/AppData/Local/Programs/MiKTeX 2.9/fonts/typ
 e1/public/amsfonts/cm/cmsy7.pfb>
-Output written on Rapport.pdf (18 pages, 675465 bytes).
+Output written on Rapport.pdf (18 pages, 677406 bytes).
 PDF statistics:
- 723 PDF objects out of 1000 (max. 8388607)
+ 738 PDF objects out of 1000 (max. 8388607)
  105 named destinations out of 1000 (max. 500000)
- 294 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 318 words of extra memory for PDF output out of 10000 (max. 10000000)
 
